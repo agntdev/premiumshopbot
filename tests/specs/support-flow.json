@@ -1,0 +1,9 @@
+[
+  {
+    "name": "создание обращения",
+    "steps": [
+      { "send": { "callback": "support:create" }, "expect": [{ "method": "sendMessage", "payload": { "text": "Опишите вопрос одним сообщением — ответим здесь." } }] },
+      { "send": { "text": "Не вижу подтверждение оплаты" }, "expect": [{ "method": "sendMessage", "payload": { "text": "Обращение создано. Мы ответим вам здесь." } }] }
+    ]
+  }
+]

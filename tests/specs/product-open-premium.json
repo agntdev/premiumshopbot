@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Открыть страницу товара Premium (отдельные варианты — 1 мес/12 мес)"
+              "text": "Выберите срок Premium:"
             }
           }
         ],
