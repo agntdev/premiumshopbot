@@ -1,17 +1,13 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { inlineButton, inlineKeyboard, registerMainMenuItem } from "../toolkit/index.js";
+import { products } from "../domain.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
-// Menu: wire this into /start via registerMainMenuItem({ label: "💎 Купить Premium", data: "product:open:premium" }) if the toolkit exposes it.
-
-const composer = new Composer();
-
+registerMainMenuItem({ label: "💎 Купить Premium", data: "product:open:premium", order: 20 });
+const composer = new Composer<Ctx>();
 composer.callbackQuery("product:open:premium", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply("Открыть страницу товара Premium (отдельные варианты — 1 мес/12 мес)");
+  const premium = (await products(ctx)).filter((p) => p.id.startsWith("premium-"));
+  await ctx.reply("Открыть страницу товара Premium (отдельные варианты — 1 мес/12 мес)", { reply_markup: inlineKeyboard([...premium.map((p) => [inlineButton(`${p.name} — ${p.price} ${p.currency}`, `product:buy:${p.id}`)]), [inlineButton("⬅️ Назад", "menu:main")]]) });
 });
-
 export default composer;
