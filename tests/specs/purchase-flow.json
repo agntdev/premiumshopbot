@@ -1,0 +1,19 @@
+[
+  {
+    "name": "галочка: заказ, ссылка оплаты и подтверждение оплаты",
+    "steps": [
+      {
+        "send": { "callback": "product:open:galochka" },
+        "expect": [{ "method": "sendMessage", "payload": { "text": "Выберите вариант покупки: 🔵 Галочка — 1 шт.\n💰 Цена: 1990 ₽\n\nПодтверждение профиля и заметный статус." } }]
+      },
+      {
+        "send": { "callback": "product:buy:galochka" },
+        "expect": [{ "method": "sendMessage", "payload": { "text": "Заказ создан. Нажмите «Оплатить», затем подтвердите оплату здесь." } }]
+      },
+      {
+        "send": { "callback": "order:paid:ord-1-galochka" },
+        "expect": [{ "method": "sendMessage", "payload": { "text": "✅ Оплата отправлена! Если оплата прошла успешно, дождитесь подтверждения заказа." } }]
+      }
+    ]
+  }
+]

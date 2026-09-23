@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "📦 Мои покупки — you're in the right place. What would you like to do next?"
+              "text": "Покупок пока нет — выберите товар в каталоге."
             }
           }
         ],
